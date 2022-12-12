@@ -11,15 +11,18 @@ const errorLine = document.getElementById("error");
 const button = document.getElementById("toggleButton");
 const pin = document.getElementById("togglePin");
 
+//Los valores para el temporizador
 let [title, hours, minutes, seconds] = [null, null, null, null];
 let [interval, time, saveData] = [null, null, null];
 
+//Metodo para mandar los valores
 const write = (to, data) => {
   fs.writeFile(to, data, function (err) {
     if (err) console.error("Shit happens");
   });
 };
 
+//Metodo para leer los valores
 const read = async (from) => {
   try {
     return JSON.parse(await fs.readFileSync(from, "utf8"));
@@ -100,6 +103,7 @@ async function loadData() {
 }
 loadData();
 
+//Lo que sucede cuando clickemos el boton Done
 button.addEventListener("click", function () {
   if (button.innerHTML == "New") {
     button.innerHTML = "Done";
@@ -125,7 +129,7 @@ button.addEventListener("click", function () {
     clearInputs();
   }
 });
-
+//Evento cuando presionas el boton Pin
 pin.addEventListener("click", function () {
   if (pin.innerHTML == "Pin") {
     pin.innerHTML = "Unpin";
